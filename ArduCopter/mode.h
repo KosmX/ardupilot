@@ -79,6 +79,7 @@ public:
     static void takeoff_stop() { takeoff.stop(); }
 
     virtual bool is_landing() const { return false; }
+    virtual bool set_target_location(const Location& location) { return false; }
 
     // mode requires terrain to be present to be functional
     virtual bool requires_terrain_failsafe() const { return false; }
@@ -1143,6 +1144,11 @@ public:
     bool controlling_position() const { return control_position; }
 
     void set_land_pause(bool new_value) { land_pause = new_value; }
+
+    // Scripting
+#if AC_PRECLAND_ENABLED
+    bool set_target_location(const Location& location) override;
+#endif
 
 protected:
 
