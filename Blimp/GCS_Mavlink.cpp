@@ -102,11 +102,11 @@ int16_t GCS_MAVLINK_Blimp::vfr_hud_throttle() const
  */
 void GCS_MAVLINK_Blimp::send_pid_tuning()
 {
-    if(blimp.control_mode == Mode::Number::MANUAL || blimp.control_mode == Mode::Number::LAND) {
+    if (blimp.control_mode == Mode::Number::MANUAL || blimp.control_mode == Mode::Number::LAND) {
         //No PIDs are used in Manual or Land mode.
         return;
     }
-    
+
     static const int8_t axes[] = {
         PID_SEND::VELX,
         PID_SEND::VELY,
@@ -469,9 +469,6 @@ MAV_RESULT GCS_MAVLINK_Blimp::handle_command_int_do_reposition(const mavlink_com
 MAV_RESULT GCS_MAVLINK_Blimp::handle_command_int_packet(const mavlink_command_int_t &packet)
 {
     switch (packet.command) {
-    case MAV_CMD_DO_FOLLOW:
-        return MAV_RESULT_UNSUPPORTED;
-
     case MAV_CMD_DO_REPOSITION:
         return handle_command_int_do_reposition(packet);
     default:
